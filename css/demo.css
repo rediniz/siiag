@@ -1,0 +1,40 @@
+@import url('reset.css');
+
+/* General Demo Style */
+/*body{
+	background:#f7f7f7 url(../images/pattern.png) repeat top left;
+	color:#000;
+	font-family: 'Arial Narrow', Arial, sans-serif;
+	font-size:13px;
+	min-height:2000px;
+}*/
+a{
+	color:#000;
+	text-decoration:none;
+}
+.clr{
+	clear:both;
+}
+
+@font-face {
+    font-family: 'Futura';
+    src: url('fontes/futuran.eot');
+    src: url('fontes/futuran.eot?#iefix') format('embedded-opentype'),
+         url('fontes/futuran.woff') format('woff'),
+         url('fontes/futuran.ttf') format('truetype'),
+         url('fontes/futuran.svg#futura_bk_btbook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+h1{
+	padding:20px;
+	font-size:28px;
+	color:#333;
+	font-family: Futura,Georgia, serif;
+	font-weight:400;
+    text-align:center;
+    text-shadow:1px 1px 1px #fff;
+}
+

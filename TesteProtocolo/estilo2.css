@@ -1,0 +1,212 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: Futura;
+  src: url(fontes/futuran.ttf);
+}
+
+
+body{/*background:-o-linear-gradient(bottom, #3d94f6 5%, #1e62d0 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#3d94f6", endColorstr="#1e62d0");	background: -o-linear-gradient(top,#3d94f6,1e62d0);
+	  background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+        background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
+
+	background-color:#3d94f6;
+	border:0px solid #ffffff;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#ffffff;
+	padding:5px;}*/
+	margin:0px;
+	
+	
+	
+}
+
+/*.teste{border:#000000 solid 1px; width:100%;}*/
+
+.cabecalhoprincipal{/*border:#000000 solid 1px;*/width:100%;}
+
+.cabecalhoinside{/*border:#000000 solid 1px;*/margin:auto;width:1022px;}
+.imagetop{/*border:#000000 solid 1px;*/}
+.menu{background:url(imagens/barra.jpg);margin:auto;width:1024px;height:30px;}
+.menuinside{/*border: #993300 solid 1px; width:100%;*/}
+.menucentralizado{/*border:#000000 solid 1px;*/margin:auto; width:1024px; /*background:#3d94f6;*/
+
+	    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
+        background:-moz-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+        background:-webkit-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+        background:-o-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+        background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+        background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
+        
+
+
+ }
+
+
+.rodape{width:100%; /*border:#000000 solid 1px;*/}
+
+
+.mensagemrodape{margin:auto;/*border:#000000 solid 1px;*/ width:1022px;}
+
+.mensagem{text-align:center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+a, a:visited {
+	text-decoration:none;
+	outline:none;
+	color:#54a6de;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+section, footer, nav{
+	display: block;
+}
+
+
+/*----------------------------
+	The Navigation Menu
+-----------------------------*/
+
+
+#colorNav > ul{
+	width: 450px; /* Increase when adding more menu items */
+	margin:0 auto;
+	display: inline;
+	font-family:Futura,Verdana, Arial;
+}
+
+#colorNav > ul > li{ /* will style only the top level li */
+	list-style: none;
+	/*box-shadow: 0 0 10px rgba(100, 100, 100, 0.2) inset,1px 1px 1px #CCC;*/
+	display: inline-block;
+	line-height: 1;
+	margin-left:17px;
+	border-radius: 3px;
+	position:relative;
+	
+}
+
+#colorNav > ul > li > a{
+	text-decoration:none !important;
+	font-size:18px;
+	padding: 28px;
+	color:#ffffff;
+}
+
+#colorNav > ul > li > a:hover{
+	color:#f89514;
+}
+
+#colorNav li ul{ /*posicionamento da lista de sub-menu */
+	position:absolute;
+	list-style:none;
+	text-align:center;
+	width:180px;
+	left:30%;
+	margin-left:-90px;
+	top:5px;
+	/*font:bold 12px 'Open Sans Condensed', sans-serif;
+	
+	/* This is important for the show/hide CSS animation */
+	max-height:0px;
+	overflow:hidden;
+	
+	-webkit-transition:max-height 0.4s linear;
+	-moz-transition:max-height 0.4s linear;
+	transition:max-height 0.4s linear;
+}
+
+
+
+#colorNav li ul li{
+	background-color:#0d3f88; /*cor dos ultimos */
+}
+
+#colorNav li ul li a{
+	padding:12px;
+	color:#fff !important;
+	text-decoration:none !important;
+	display:block;
+}
+
+#colorNav li ul li:nth-child(odd){ /* zebra stripes */
+	background-color:#0d3f75;/*cor dos primeiros*/
+}
+
+#colorNav li ul li:hover{
+	background-color:#205095;
+}
+
+#colorNav li ul li:first-child{
+	border-radius:3px 3px 0 0;
+	margin-top:25px;
+	position:relative;
+}
+
+#colorNav li ul li:first-child:before{ /* the pointer tip */
+	content:'';
+	position:absolute;
+	width:1px;
+	height:1px;
+	border:5px solid transparent;
+	border-bottom-color:#313131;
+	left:50%;
+	top:-10px;
+	margin-left:-5px;
+}
+
+#colorNav li ul li:last-child{
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/* This will trigger the CSS */
+/* transition animation on hover */
+
+#colorNav li:hover ul{
+	max-height:200px; /* Increase when adding more dropdown items */
+}
+
+
+/*----------------------------
+	Color Themes
+-----------------------------*/
+
+
+/*#colorNav li.green{
+	/* This is the color of the menu item
+	background-color:#00c08b;
+	
+	/* This is the color of the icon 
+	color:#127a5d;
+}
+
+#colorNav li.red{		background-color:#ea5080;color:#aa2a52;}
+#colorNav li.blue{		background-color:#53bfe2;color:#2884a2;}
+#colorNav li.yellow{	background-color:#f8c54d;color:#ab8426;}
+#colorNav li.purple{	background-color:#df6dc2;color:#9f3c85;}*/
+
+
+

@@ -1,0 +1,237 @@
+<html>
+<head>
+<link rel="STYLESHEET" type="text/css" href="style.css">
+<title>AceCalendar User Guide</title>
+<script type="text/javascript" language="JavaScript">
+<!--
+function sendMail(name, subject) {
+	var s;
+	s = name + '@'+ 'navsurf.com';
+	if (arguments.length >= 2)
+	{
+		s += '?subject=' + subject
+	}
+	window.location.href = 'mailto:' + s;
+}
+// -->
+</script>
+</head>
+<body>
+<table border="0" cellpadding="4" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1" width="100%">
+  <tr>
+    <td width="16%" align="center" bgcolor="#000099"><b>
+    <a href="user_guide.htm" style="text-decoration: none">
+    <font color="#FFFFFF">User Guide</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099"><b>
+    <a href="acecalendar_builder.htm" style="text-decoration: none">
+    <font color="#FFFFFF">AceCalendar Builder</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099">
+    <b><a href="acecalendar_example.htm" style="text-decoration: none">
+    <font color="#FFFFFF">Example</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099">
+    <b>
+    <a target="navsurf" href="http://navsurf.com/dhtml/acecalendar/" style="text-decoration: none">
+    <font color="#FFFFFF">Product Page</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099"><b>
+    <a target="navsurf" href="http://navsurf.com/support/" style="text-decoration: none">
+    <font color="#FFFFFF">Technical Support</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099">
+    <b>
+    <a target="navsurf" href="http://navsurf.com/dhtml/acecalendar/orderpage.asp" style="text-decoration: none">
+    <font color="#FFFFFF">Online Store</font></a></b></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h1>AceCalendar</h1>
+<h2>Product Information</h2>
+<h3>Overview</h3>
+<p>ACECalendar is a versatile JavaScript date picker that can be integrated seamlessly 
+into your forms so that visitors can fill up the data fields of your forms 
+easily, quickly and accurately.</p>
+<h3>Features</h3>
+<ul>
+  <li>Cross platform browser-based <a href="acecalendar_builder.htm" target="builder">AceCalendar 
+  Builder</a> to configure, save and load your calendar settings</li>
+  <li>Unlimited number of calendars on single page and form (<a href="acecalendar_example.htm">Click here</a> for 
+  example)</li>
+  <li>Popup calendar interface (<a href="acecalendar_example.htm">Click here</a> for example)</li>
+  <li>Easy to set up and integrates seamlessly into your forms</li>
+  <li>Configurable calendar appearance</li>
+  <li>Configurable months and weekdays title</li>
+  <li>Initial date can be set dynamically</li>
+  <li>JavaScript class interface for advanced users</li>
+<li>Cross-platform and cross-browser compatible<ul>
+    <li>IE Explorer 5.x and 6.x</li>
+    <li>Netscape 6.x and 7.x</li>
+    <li>Opera 6.x and 7.x</li>
+    <li>Mozilla 1.x</li>
+    <li>Konqueror 2.x and 3.x</li>
+    <li>Safari</ul>
+  </li>
+  <li>Free technical support</li>
+  <li>Free setup support (for registered users only)</li>
+</ul>
+<h2>Installation Instructions</h2>
+<h3>Configure the calendar using the calendar builder</h3>
+<p>Configure the calendar using
+<a href="acecalendar_builder.html" target="builder">ACECalendar Builder</a>. 
+Detailed instructions and descriptions for the input fields can be found on the 
+page itself. As a quick start, you could load the calendar code in the example, paste it in the text area and click on <b>Load Code</b> 
+to load the calendar configuration in the example.</p>
+<p>Paste the generated code on your web page at the location 
+ 
+where you want the calendar to appear. If you want the calendar to appear in a 
+new window and return the values to your form, you could refer to the following 
+section.</p>
+<p>That's all you need to do to integrate the calendar to your form!</p>
+<p><b>Important Notes:</b></p>
+<ol>
+  <li>The calendar must be embedded within &lt;form&gt;&lt;/form&gt; tags. The form name must be 
+  specified in the builder.</li>
+  <li>It is not necessary to specify the day, month and year field names if you 
+  have only one calendar on the page. But we strongly recommend you to do so in 
+  order to have control over the names of the input fields. By default, the 
+  names are <i>yr_num</i>, <i>mo_num</i> and <i>dt_num</i> respectively.</li>
+  <li>If you have several calendars on the same page, the calendar name must be 
+  different for each calendar.</li>
+  <li>If you have several calendars in the same form, the name of the year, 
+  month and day field must be different for each calendar.</li>
+</ol>
+<h2>Advanced Issues</h2>
+<h3>Changing the name of the months in the dropdown list</h3>
+<p>You may want to change the names of the month in the dropdown list, 
+especially if your web site is in another language other than English. To modify 
+the dropdown list, add the highlighted line to the calendar code at the position 
+indicated:</p>
+<blockquote>
+<p>var oCal_1 = new AceCalendar();<br>
+oCal_1.setName(&quot;oCal_1&quot;);<br>
+<span style="background-color: #FFFF00">oCal_1.months 
+= ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
+'September', 'October', 'November', 'December'];<br>
+</span>oCal_1.setFormName(&quot;myForm&quot;);<br>
+...</p>
+</blockquote>
+<p><b>Ensure that there are 12 elements in the array.</b></p>
+<p>&nbsp;</p>
+<h3>Changing the days of the week on the calendar</h3>
+<p>You may want to change the names of the month in the dropdown list, 
+especially if your web site is in another language other than English. To modify 
+the dropdown list, add the highlighted line to the calendar code at the position 
+indicated:</p>
+<blockquote>
+<p>var oCal_1 = new AceCalendar();<br>
+oCal_1.setName(&quot;oCal_1&quot;);<br>
+<span style="background-color: #FFFF00">oCal_1.days = ['M', 'T', 'W', 'T', 'F', 
+'S', 'S'];<br>
+</span>oCal_1.setFormName(&quot;myForm&quot;);<br>
+...</p>
+</blockquote>
+<p><b>Ensure that there are 7 elements in the array.</b></p>
+<h3>Using JavaScript to retrieve the date from the calendar</h3>
+<p>You could interface AceCalendar with your own JavaScript functions. The following methods 
+are available for retrieving the date from the calendar.</p>
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber2">
+  <tr>
+    <td><b>Function Name</b></td>
+    <td><b>Description</b></td>
+  </tr>
+  <tr>
+    <td>getDay()</td>
+    <td>Returns the day of the month ( 1 - 31 )</td>
+  </tr>
+  <tr>
+    <td>getMonth()</td>
+    <td>Returns the month ( 0 - 11)</td>
+  </tr>
+  <tr>
+    <td>getYear()</td>
+    <td>Returns the 4 digit year</td>
+  </tr>
+  <tr>
+    <td>getString()</td>
+    <td>Returns the date in locale string format</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h3>Calling an external JavaScript function whenever the date is modified</h3>
+<p>The setAction function of the AceCalendar class is called whenever the date 
+is modified. By default, it is empty. You could override the function to perform 
+additional tasks. An example can be found in popup_calendar.htm</p>
+<p>&nbsp;</p>
+<h3>Creating popup calendars and integrating them to your form</h3>
+<p>ACECalendar can also be customized as a popup calendar. The calendar will 
+appear at the click of a button and whenever the user modifies the date, it is 
+passed back to the form. You need some knowledge of JavaScript and HTML to 
+follow the instructions below. Alternatively, we also provide customization 
+services at very reasonable rates.</p>
+<ol>
+  <li>Create the popup page containing the calendar. Do not forget to embed the 
+  calendar within &lt;form&gt;&lt;/form&gt;</li>
+  <li>Override the setAction function of the AceCalendar class. The function is 
+  called whenever the date is modified. By default, it is empty. Modify the 
+  function such that it will pass back the variables to the opener page.</li>
+</ol>
+<p>A complete example can be found in the download. Please refer to 
+popup_calendar.htm (popup page) and acecalendar_example.htm (opener page) in the 
+download.</p>
+<p>&nbsp;</p>
+<h2>Technical Support</h2>
+<p>If you experience problems installing or using the script, you could consult our
+<a target="navsurf" href="http://navsurf.com/support/">Technical Support</a> 
+online or <a href="javascript:sendMail('technical.support');">send us an email</a> describing 
+the problem, together with the URL of the web page or an attachment of the 
+necessary files. All the files should be placed in a zip file to facilitate easy 
+retrieval.</p>
+<p>Feedback and suggestions are most welcome. We greatly appreciate user 
+comments to help us to improve on the product and documentation.</p>
+<p>&nbsp;</p>
+<h2>Product Registration</h2>
+<p>The script is free only for non-commercial web sites. For commercial usage, 
+you have to purchase the script to remove the credit link. Details on the 
+pricing, ordering process and customer support can be found on the
+<a target="_blank" href="http://navsurf.com/dhtml/acecalendar/orderpage.asp">
+product order page</a>.</p>
+<p>&nbsp;</p>
+<h2>License Agreement</h2>
+<p>All copyrights to the software are exclusively owned by NavSurf. You may not 
+use, copy, emulate, clone, sell, modify, distribute, decompile, disassemble, 
+reverse engineer or transfer the software, or any portion of it, except as 
+provided for in this agreement. Any unauthorized use of the software will result 
+in criminal and civil prosecution. All rights not expressly granted in this 
+license are reserved by the author. The unregistered version of the software may 
+be freely distributed provided that the distribution package is not modified in 
+any way.</p>
+<p>The copyright owner and author of the software disclaim all warranties either 
+expressed or implied, including, but not limited to implied warranties of 
+merchantability and fitness for a particular purpose, with respect to the 
+software or documentation. In no event will the author or copyright owner be 
+liable for any damages whatsoever (including without limitation to damages for 
+loss of business profits, business interruption, loss of business information 
+and the like) arising out of the use or the inability to use this product.</p>
+<p>Installing and using this software signifies acceptance of these terms and 
+conditions. If you do not agree with the terms of this license, you must cease 
+to use the product and remove the files immediately.</p>
+<p>&nbsp;</p>
+<table border="0" cellpadding="4" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1" width="100%">
+  <tr>
+    <td width="16%" align="center" bgcolor="#000099"><b>
+    <a href="user_guide.htm" style="text-decoration: none"><font color="#FFFFFF">User Guide</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099"><b>
+    <a href="acecalendar_builder.htm" style="text-decoration: none"><font color="#FFFFFF">AceCalendar Builder</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099">
+    <b>
+    <a href="acecalendar_example.htm" style="text-decoration: none"><font color="#FFFFFF">Example</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099">
+    <b>
+    <a target="navsurf" href="http://navsurf.com/dhtml/acecalendar/" style="text-decoration: none"><font color="#FFFFFF">Product Page</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099"><b>
+    <a target="navsurf" href="http://navsurf.com/support/" style="text-decoration: none"><font color="#FFFFFF">
+    Technical Support</font></a></b></td>
+    <td width="16%" align="center" bgcolor="#000099">
+    <b>
+    <a target="navsurf" href="http://navsurf.com/dhtml/acecalendar/orderpage.asp" style="text-decoration: none"><font color="#FFFFFF">Online Store</font></a></b></td>
+  </tr>
+</table>
+</body>
+</html>

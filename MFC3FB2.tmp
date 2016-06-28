@@ -1,0 +1,353 @@
+<%@LANGUAGE="VBScript" CODEPAGE="65001"%>
+<!-- #INCLUDE FILE ="include/Conexao_7180.asp" -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Estoque</title>
+<!--CSS -->
+<link rel="stylesheet" href="estilo.css" type="text/css"/>
+<link rel="stylesheet" href="abas.css" type="text/css"/>
+<link href="botao_azul.css" rel="stylesheet" type="text/css" />
+<link href="tabela.css" rel="stylesheet" type="text/css" />
+<link href="menu.css" rel="stylesheet" type="text/css" />
+<!--CSS-->
+<link rel="shortcut icon" href="imagens/siiag-logo.ico" type="image/x-icon">
+<link href="botao_azul.css" rel="stylesheet" type="text/css" />
+<link href="submenu.css" rel="stylesheet" type="text/css" />
+<link href="tabela.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="imagetoolbar" content="no">
+<script src="scripts/jquery-1.9.1.js"></script>
+<style>
+
+#tabela tr {
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script type="text/javascript" language="javascript">
+var simac = true
+$(document).ready(function(){
+
+if($("#pag").val() == ""){
+$("#pag").val(1);
+}
+		$("#carregando").hide();
+				$.ajax({
+					method: "POST",		
+						data: {
+					simac : document.getElementById("check_simac").checked,
+					ativo : document.getElementById("check_ativos").checked
+					},		
+					contentType: "application/x-www-form-urlencoded; charset=utf-8; code=65001", 
+					url: "estoque_cadastrados.asp?pag="+$("#pag").val(), // ENDEREÇO DA PÁGINA PARA ONDE OS DADOS SERÃO PASSADOS
+					dataType: "html", // TIPO DE DADOS DE RETORNO
+					//timeout: 5000, // TEMPO LIMITE PARA AGUARDAR RESPOSTA DA REQUISIÇÃO
+					beforeSend: function() { // ANTES DA REQUISIÇÃO
+						$("#carregando").show();
+					},
+					complete: function() { // LOGO APÓS RECEBER RESPOSTA, TENDO SUCESSO OU NÃO
+						$("#carregando").hide();  
+					},
+					success: function(data) { // CASO RECEBA RESPOTA COM SUCESSO
+						$('#tabela').html(data);	  
+					},
+					error: function(data){ // CASO OCORRA ERRO NA REQUISIÇÃO
+						alert("Erro.");
+					}	
+      		})
+		
+		 $( "#check_simac" ).on("click", function() {
+			
+			if(simac){
+			$(".coluna_simac").each(function(){
+			
+		
+			$(this).hide();
+		
+			
+			});
+			simac=false;
+			}else{
+				$(".coluna_simac").each(function(){
+			
+		
+			$(this).show();
+		
+			
+			});
+			simac=true;
+			
+			}
+			
+			//	$.ajax({
+//					method: "POST",	
+//					data: {
+//					simac : document.getElementById("check_simac").checked,
+//					ativo : document.getElementById("check_ativos").checked
+//					},
+//					contentType: "application/x-www-form-urlencoded; charset=utf-8; code=65001", 
+//					url: "estoque_cadastrados.asp?pag="+$("#pag").val(), // ENDEREÇO DA PÁGINA PARA ONDE OS DADOS SERÃO PASSADOS
+//					dataType: "html", // TIPO DE DADOS DE RETORNO
+//					//timeout: 5000, // TEMPO LIMITE PARA AGUARDAR RESPOSTA DA REQUISIÇÃO
+//					beforeSend: function() { // ANTES DA REQUISIÇÃO
+//						$("#tabela").hide();
+//						$("#carregando").show();
+//					},
+//					complete: function() { // LOGO APÓS RECEBER RESPOSTA, TENDO SUCESSO OU NÃO
+//						$("#carregando").hide();  
+//						$("#tabela").show();
+//					},
+//					success: function(data) { // CASO RECEBA RESPOTA COM SUCESSO
+//						$('#tabela').html(data);	  
+//					},
+//					error: function(data){ // CASO OCORRA ERRO NA REQUISIÇÃO
+//						alert("Erro.");
+//					}
+//					
+//				
+//		
+//      		})
+	
+	});
+		 $( "#check_ativos" ).on("click", function() {
+
+			
+				$.ajax({
+					method: "POST",	
+					data: {
+					simac : document.getElementById("check_simac").checked,
+					ativo : document.getElementById("check_ativos").checked
+					},
+					contentType: "application/x-www-form-urlencoded; charset=utf-8; code=65001", 
+					url: "estoque_cadastrados.asp?pag="+$("#pag").val(), // ENDEREÇO DA PÁGINA PARA ONDE OS DADOS SERÃO PASSADOS
+					dataType: "html", // TIPO DE DADOS DE RETORNO
+					//timeout: 5000, // TEMPO LIMITE PARA AGUARDAR RESPOSTA DA REQUISIÇÃO
+					beforeSend: function() { // ANTES DA REQUISIÇÃO
+						$("#tabela").hide();
+						$("#carregando").show();
+					},
+					complete: function() { // LOGO APÓS RECEBER RESPOSTA, TENDO SUCESSO OU NÃO
+						$("#carregando").hide();  
+						$("#tabela").show(); 
+					},
+					success: function(data) { // CASO RECEBA RESPOTA COM SUCESSO
+						$('#tabela').html(data);	  
+					},
+					error: function(data){ // CASO OCORRA ERRO NA REQUISIÇÃO
+						alert("Erro.");
+					}
+      		})
+	});
+	
+	$(document).on("click", "#tabela #material", function(){
+	
+	$(this).select();
+	
+	codigo =  $(this).find("#codigo").val();
+	nome = $(this).find("#nome").html();
+	valor = $(this).find("#valor").val();
+	qtd = $(this).find("#qtd").html();
+	qtd_min = $(this).find("#qtd_min").html();
+	unidade = $(this).find("#unidade").html();
+	ativo = $(this).find("#ativo").html();
+	
+	nome_simac = $(this).find("#nome_simac").html();
+	cod_simac = $(this).find("#cod_simac").html();
+	qtd_simac = $(this).find("#qtd_simac").html();
+	
+	$("#codigo").val(codigo);
+	$("#nome").val(nome);
+	$("#valor").val(valor);
+	$("#qtd").val(qtd);
+	$("#qtd_min").val(qtd_min);
+	$("#unidade option:selected").html(unidade);
+	if(ativo == "Sim"){
+		document.getElementById("ativo").checked = true;
+	}else{
+		$("#ativo").removeAttr("checked");
+	}
+		
+	$("#nome_simac").val(nome_simac);
+	$("#cod_simac").val(cod_simac);
+	$("#qtd_simac").val(qtd_simac);
+	
+
+	});
+	
+	$("#salvar").click(function(){
+	
+	salvar = window.confirm("Salvar alterações no produto?");
+	
+	if(document.getElementById("ativo").checked == true){
+	$("#ativo_valor").val(1);
+	} else{
+	$("#ativo_valor").val(0);
+	}
+	
+	if(salvar){
+	
+	window.location.assign("estoque_editar_con.asp");
+	
+	} else{
+	return false;
+	}
+	
+	});
+		});
+			
+	</script>
+
+</head>
+<body>
+<%
+response.write "<input id='pag' type='hidden' value=" & request("pag") & " >"
+%>
+<div class="teste2">
+<!--fundo azul do meio-->
+<!-- #INCLUDE FILE ="topo.asp" -->
+<!--#include file="include/Conexao_7180.asp"-->
+<%
+'dim obj
+'set obj = new Conexao
+%>
+<div class="corposite">
+  <!--corpo-->
+  <div class="container">
+    <div class="conteudo2">
+      <p>
+      <div id='cssmenu' >
+        <ul>
+          <li><a href='estoque_requisicao.asp'><span>Novo Pedido</span></a></li>
+          <li ><a href='estoque_pendentes.asp'><span>Pedidos Pendentes</span></a></li>
+          <li class='active'><a href='estoque_manutencao.asp'><span>Manutenção</span></a></li>
+        
+        </ul>
+      </div>
+      </p>
+      <div id='submenu'>
+        <ul>
+          <li class='active'><a href=''><span>Editar Produto</span></a></li>
+          <li><a href='estoque_cadastrar.asp'><span>Cadastrar Produto</span></a></li>
+          <li><a href='#'><span>Ajuda</span></a></li>
+        </ul>
+      </div>
+      <p class="paragrafoteste">
+      <div class="testess">
+      <form id="formulario" method="POST" action="estoque_editar_con.asp" enctype="application/x-www-form-urlencoded" >
+        <fieldset style=" border-color: #FFCC66; border:#FFCC66 1px solid; border-radius:4px;">
+        <legend><span class="titulos">Informações do produto selecionado</span></legend>
+        <fieldset style=" border-color: #FFCC66; border:#FFCC66 1px solid; border-radius:4px; background:#F8F8F8">
+        <legend><span class="titulos" >SIMAC</span></legend>
+        <span>
+        <label>Nome:
+        <input  class="form-field" name="nome_simac" type="text" id="nome_simac" size="35" />
+        </label>
+        <label style="padding-right:5px"> Código:
+        <input class="form-field" name="cod_simac" type="text" id="cod_simac" size="5" />
+        </label>
+        <label> Quantidade: </label>
+        <input class="form-field" name="qtd_simac" type="text" id="qtd_simac" size="5" />
+        </span><span>
+        </label>
+        </span>
+        </fieldset>
+        <p><span>
+          <label for="nome" >Nome: </label>
+          <input class="form-field" name="nome" type="text" id="nome" size="35" />
+          </span>
+          <label for="valor"><span>Valor: </span></label>
+          <input class="form-field" name="valor" type="text" id="valor" size="5" />
+          <span>
+          <label for="quantidade">Quantidade: </label>
+          <input class="form-field" name="qtd" type="text" id="qtd" size="1"  maxlength="4"/>
+          <label for="qtd_min"> Qtd. Mín.: </label>
+          <input class="form-field" name="qtd_min" type="text" id="qtd_min" size="1" maxlength="4"/>
+          </span><span style="padding-left:10px">
+          <label for "unidade"> Unidade:</label>
+          <select id="unidade" name="unidade">
+                      <%
+  
+strQuery = 		"select CO_UNIDADE, DE_UNIDADE FROM TB_ESTOQUE_UNIDADE WHERE(IC_ATIVO = 1); " 'Selecionando o campo descricao do recurso da tabela tipos_recursos 
+set Ls=			Server.CreateObject("ADODB.RecordSet")
+Ls.Open strQuery, dados_sys
+
+ 'Agora iremos exibir os dados do Recordset gerado pela consulta SQL
+ 'Vamos percorrer o recordset até chegar no final do arquivo
+ 		
+  DO UNTIL Ls.eof 'ate o final do campo, ou seja, passando por todos os valor existentes
+  
+ 'atribuindo os valores dos campos as variáveis
+	  CO_UNIDADE=Ls("CO_UNIDADE")
+	  DE_UNIDADE=Ls("DE_UNIDADE")
+
+                response.write "<option value='"& CO_UNIDADE &"'>"& DE_UNIDADE &"</option>" 'imprimindo
+
+    Ls.movenext 'passando para o proximo elemento da tabela
+  
+	LOOP
+
+objConn.close 
+set Ls = 		nothing
+set objConn = 	nothing 
+'fechando todas as conexoes
+%>
+</select>
+          </span> 
+        <span>
+        <label for="ativo"><span >Ativo:</span></label>
+        <input style: vspace="10px"type="checkbox" name="ativo" id="ativo" />
+        <p>
+        <input type='hidden'  id = "codigo" name="codigo" value=''/>
+        <input type='hidden' id = "ativo_valor" name="ativo_valor" value='' />
+            </form>
+        <div align="center" style="padding-top:10px">
+        <button id="salvar" class="myButton" name="salvar">Salvar</button>
+        </div>
+        </p>
+        </span>
+        </fieldset>
+    
+        <fieldset style=" border-color: #FFCC66; border:#FFCC66 1px solid; border-radius:4px;">
+        <legend><span class="titulos">Produtos Cadastrados</span></legend>
+        <div align="center" style="padding-bottom:10px">
+         <label for="check_ativos"><span>Apenas materiais ativos</span></label>
+         <%
+		 if request("ativo") <> "false" then
+		 response.write  "<input style: vspace='10px' type='checkbox' name='check_ativos' id='check_ativos' checked='checked'/>"
+		 else
+		 response.write  "<input style: vspace='10px' type='checkbox' name='check_ativos' id='check_ativos' />"
+		 end if
+		 %>
+             <label for="check_simac"><span>Exibir colunas SIMAC</span></label>
+         <%
+		  if request("simac") <> "false" then
+		 response.write  "<input style: vspace='10px' type='checkbox' name='check_simac' id='check_simac'  checked='checked'/>"
+		 else
+		 response.write  "<input style: vspace='10px' type='checkbox' name='check_simac' id='check_simac' />"
+		 end if
+		 %>
+           
+        </div>
+        <div class="tabela" id="tabela" style="margin-left:0.8%;" >
+        </div>
+             <div id="carregando" align="center">
+        <img src="imagens/carregando.gif"   />
+        </div>
+        </fieldset>
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <!--fim do corpo-->
+  <!-- #INCLUDE FILE ="rodape.asp" -->
+</div>
+<!--teste-->
+</body>
+</html>

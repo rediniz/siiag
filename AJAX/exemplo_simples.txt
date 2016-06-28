@@ -1,0 +1,18 @@
+	
+$("#botao").on("click", function({
+
+	var mes = $("#mes").val();
+
+		$.ajax({
+				type: "GET",
+				url: 'filtro_material.asp?mes="+mes,
+				success: function (data) {
+
+				$("#resultado").html(data);
+					
+            	},			    
+  			});
+
+});
+
+

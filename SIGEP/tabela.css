@@ -1,0 +1,96 @@
+@import url("form.css");
+.tabela {
+	width:99%;
+	border:0px solid #333;
+	align: center;
+	-moz-border-radius-bottomleft:4px;
+	-webkit-border-bottom-left-radius:4px;
+	border-bottom-left-radius:4px;
+	-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+	-moz-border-radius-topright:4px;
+	-webkit-border-top-right-radius:4px;
+	border-top-right-radius:4px;
+	-moz-border-radius-topleft:4px;
+	-webkit-border-top-left-radius:4px;
+	border-top-left-radius:4px;
+}
+.tabela table {
+	align:center;
+	text-align:center;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border:1px solid #999;
+	width:99%;
+	height:100%;
+	margin:0px;
+	padding:0px;
+}
+.tabela tr:last-child td:last-child {
+	text-align:center;
+	-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+}
+.tabela table tr:first-child td:first-child {
+	text-align:center;
+	padding:0px;
+}
+.tabela table tr:first-child td:last-child {
+	text-align:center;
+}
+.tabela tr:last-child td:first-child {
+
+	text-align:center;
+	-moz-border-radius-bottomleft:4px;
+	-webkit-border-bottom-left-radius:4px;
+	border-bottom-left-radius:4px;
+}
+.tabela tr:hover td {
+	background:#f2f2f2;
+	text-align:center;
+}
+.tabela tr:nth-child(odd) {
+	background-color:#f8f8f8;
+}
+.tabela tr:nth-child(even) {
+	background-color:#fcfcfc;
+}
+.tabela td {
+	vertical-align:middle;
+	border:1px solid #999;
+	border-width:0px 1px 1px 0px;
+	text-align:center;
+	padding:1px;
+	font-size:12px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#333;
+}
+.tabela tr:last-child td {
+	border-width:0px 1px 0px 0px;
+}
+.tabela tr td:last-child {
+	border-width:0px 0px 1px 0px;
+}
+.tabela tr:last-child td:last-child {
+	border-width:0px 0px 0px 0px;
+}
+.tabela tr:first-child td {
+	background: #999999; /* Old browsers */
+	vertical-align:middle;
+	text-align:center;
+	font-size:14px;
+	font-family:Futura,Arial,Verdana;
+	font-weight:normal;
+	color:#fff;
+	padding:0px;
+}
+
+.tabela tr:first-child td:first-child {
+	border-width:0px 0px 1px 0px;
+}
+.tabela tr:first-child td:last-child {
+	border-width:0px 0px 1px 1px;
+}

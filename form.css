@@ -1,0 +1,126 @@
+@charset "utf-8";
+/* CSS Document */
+
+.form {
+	border:1px solid #ffffff;
+	border-width:0px 1px 1px 0px;
+	text-align:center;
+	padding:5px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#666;
+}
+
+.form-field {
+   height:15px;
+   border: 1px solid #b5cce2;
+   background: #edf4fc;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   color: #666;
+   box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.1) inset;
+   padding:6px;
+   margin-bottom:0px;
+   width:auto;
+   
+}
+ 
+ .form-select {
+   height:30px;
+   border: 1px solid #b5cce2;
+   background: #edf4fc;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   color: #666;
+   box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.1) inset;
+   padding:6px;
+   margin-bottom:0px;
+   width:auto;
+   
+}  
+   
+    .form_bloqueado {
+   height:30px;
+   border: 1px solid #b5cce2;
+   background: #edf4fc;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   color: #666;
+   box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.1) inset;
+   padding:6px;
+   margin-bottom:0px;
+   width:auto;
+   
+}
+
+
+	.form_bloqueado:hover {
+   	background: #fff;
+
+   }
+   
+   
+   .form-field:focus {
+	background: #fff;
+	color: #000000;
+	outline:none;
+	padding:6px;
+	box-shadow: 0 0 5px #9ecaed;
+   
+
+   }
+   
+.form-field:hover{
+	background: #fff;
+	  
+}
+   
+.form input{
+	border: 1.5px solid #b5cce2;
+	color:  #b5cce2;
+	background: #edf4fc;
+}
+   
+.testess label{
+
+	width:150px;	
+	padding-right:5px;
+	padding-left:5px;
+	color:#666;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+
+}
+
+
+.campo_bloqueado {
+   height:15px;
+   border: 1px solid #b5cce2;
+   background: #edf4fc;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   color: #666;
+   box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.1) inset;
+   padding:6px;
+   margin-bottom:0px;
+   width:auto;
+}
+
+.campo_editavel {
+   height:15px;
+   border: 1px solid #b5cce2;
+   background: #FFFFFF;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   color: #000000;
+   box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.1) inset;
+   padding:6px;
+   margin-bottom:0px;
+   width:auto;
+   
+}

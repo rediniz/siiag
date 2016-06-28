@@ -1,0 +1,360 @@
+<%@LANGUAGE="VBScript" CODEPAGE="65001"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Consultar Afastamentos</title>
+<script src="scripts/jquery.ui.core.js"></script>
+<script src="scripts/jquery.ui.widget.js"></script>
+<script src="scripts/jquery-1.9.1.js"></script>
+<script src="scripts/jquery.ui.datepicker.js"></script>
+<script src="scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<!--CSS -->
+<link rel="stylesheet" href="estilo.css" type="text/css"/>
+<link rel="stylesheet" href="abas.css" type="text/css"/>
+<link href="botao_azul.css" rel="stylesheet" type="text/css" />
+<link href="tabela.css" rel="stylesheet" type="text/css" />
+<link href="menu.css" rel="stylesheet" type="text/css" />
+<link href="css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<!--CSS-->
+<link rel="shortcut icon" href="imagens/siiag-logo.ico" type="image/x-icon">
+
+<!--favicon -->
+
+<style>
+.ui-datepicker {
+	font-size:12px;
+}
+
+.datepicker{
+			
+	height:15px;
+	border: 1px solid #b5cce2;
+	background: #edf4fc;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #666;
+	box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.1) inset;
+	padding:6px;
+	width:auto;	
+}
+		
+.datepicker:focus {
+	background: #fff;
+	color: #000000;
+	outline:none;
+	padding:6px;
+	box-shadow: 0 0 5px #9ecaed;
+}
+
+.ui-autocomplete {
+
+	height:120px;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	font-size:12px;
+}
+
+</style>
+
+<script>
+    $(function() {
+    $( ".datepicker" ).datepicker({
+    dateFormat: 'dd/mm/yy',
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+  });
+   });
+  </script>
+
+</head>
+<% 
+	dim tagPAG
+	tagPAG = "pag"
+	dim Pag 
+	dim numPag
+	numPag = 2
+
+	sit = Request("situacao")
+	matricula = Request("nome")
+	data_de = Request("data_inicio")
+	data_a = Request("data_final")
+	if(sit = "" and matricula = "" and data_de = "" and data_a = "")  then sit = "1" end if
+
+	'Response.Write data_de
+	'Response.Write data_a
+
+	Pag = cint(request("pag"))
+	if Pag = 0 then Pag = 1
+
+%>
+
+<body>
+<div class="teste">
+  <!--fundo azul do meio-->
+  <!-- #INCLUDE FILE ="topo.asp" -->
+  <!-- #INCLUDE/ FILE ="conexao_7180.asp" -->
+  <div class="corposite">
+    <!--corpo-->
+    <div class="container">
+      <div class="conteudo2">
+        <div class="usuariodiv">
+          <div id='cssmenu'>
+            <ul>
+              <li ><a href='afastamento.asp'><span>Solicitar</span></a></li>
+              <li class='active' ><a href='afastamento_consultar.asp?sit=1'><span>Consultar</span></a></li>
+            </ul>
+          </div>
+          </p>
+          <div id='submenu'>
+            <ul>
+              <li><a href='#'><span>Ajuda</span></a></li>
+            </ul>
+          </div>
+          <fieldset class="testess" style=" border-color: #FFCC66; border:#FFCC66 1px solid; border-radius:4px;" >
+          <legend ><span class="titulos" >Consultar Afastamento</span></legend>
+          
+		  <form action="afastamento_consultar.asp" method="get" target="_self">
+          <label for="situacao" style="padding-top:10px"><br />
+          
+          Situação: </label>
+          <select name="situacao" id="situacao" class="form-select">
+            <option  <% if sit="0" Then Response.Write "selected='selected'" END IF%> value="0">Todos</option>
+            <option <% if sit="1" Then Response.Write "selected='selected'" END IF%> value="1">Solicitado</option>
+            <option <% if sit="2" Then Response.Write "selected='selected'" END IF%> value="2">Confirmado</option>
+            <option <% if sit="3" Then Response.Write "selected='selected'" END IF%> value="3">Pendente</option>
+            <option <% if sit="5" Then Response.Write "selected='selected'" END IF%> value="5">Gozado</option>
+            <option <% if sit="6" Then Response.Write "selected='selected'" END IF%> value="6">Não Atendido</option>
+            <option <% if sit="7" Then Response.Write "selected='selected'" END IF%> value="7">Cancelado</option>
+            <option <% if sit="8" Then Response.Write "selected='selected'" END IF%> value="8">Em Andamento</option>
+          </select>
+          <label>Nome:</label>
+          <select name="nome" class="form-select">
+          	<option value="">Todos</option>
+            
+            
+          <%
+            
+
+			
+			SQL = "SELECT NO_NOME, CO_MATRICULA FROM [SIIAG].[dbo].[VW_USUARIOS] WHERE IC_ATIVO = '1' "
+			SQL = SQL + " AND CO_MATRICULA <> '' ORDER BY NO_NOME"
+			
+			set rs=Server.CreateObject("ADODB.RecordSet")
+			rs.Open SQL, dados_sys, 3, , 32
+			
+			do while(rs.eof = false)
+				
+				nome = rs("NO_NOME")
+				response.Write "<option " 
+				if matricula = rs("CO_MATRICULA")  Then response.Write "selected='selected'" END IF
+				response.Write " value='"& rs("CO_MATRICULA") &"'>" & nome & "</option>"
+				rs.MoveNext
+			loop
+		  %>
+          </select>
+          <label>De: </label>
+         <input <% if data_de <> "" Then Response.Write "value= '"&data_de&"' " End If %>name="data_inicio" type="text" size="10" maxlength="10"  id="data_inicio" class="datepicker"/>
+        
+          <label> até </label>
+          <input <% if data_a <> "" Then Response.Write "value= '"&data_a&"' " End If %>name="data_final" type="text" size="10" maxlength="10"  id="data_final" class="datepicker" />
+          
+          <input type="submit" class='myButton' name="btnPesquisar" id="btnPesquisar" value="Pesquisar" />
+</form>
+          </legend>
+          <p></p>
+          <div class="tabela" >
+            <table>
+              <tr>
+                <td width="10%"> Código </td>
+                <td width="35%" > Usuário </td>
+                <td width="21%"> Tipo </td>
+                <td width="12%"> Data Início </td>
+                <td width="11%"> Data Fim </td>
+                <td width="11%"> Situação </td>
+              </tr>
+              <% 
+					
+					Dim campos(5)
+					
+					SQL = "SELECT * FROM [SIIAG].[dbo].[TB_AFASTAMENTOS] AS afast"
+					SQL = SQL + " INNER JOIN [SIIAG].[dbo].[VW_USUARIOS] AS usuarios "
+					SQL = SQL + " ON usuarios.CO_MATRICULA = afast.CO_MATRICULA AND IC_ATIVO = '1'"
+					SQL = SQL + " INNER JOIN [SIIAG].[dbo].[TB_SITUACOES] AS sit ON afast.CO_SITUACAO = sit.CO_SITUACAO"
+					SQL = SQL + " INNER JOIN [SIIAG].[dbo].[TB_TIPOS_AFASTAMENTO] AS t_afast "
+					SQL = SQL + " ON afast.CO_TIPO_AFASTAMENTO = t_afast.CO_TIPO_AFASTAMENTO "
+					
+					cont = 0
+					
+					cont = cont + 1
+					campos(cont) = " (afast.CO_UNIDADE = '" & request.Cookies("co_usuario_unidade_siiag") & "')"
+
+					if(sit <> "" and sit <> "0") then
+						cont = cont + 1
+						campos(cont) = " (afast.CO_SITUACAO = '" & sit & "')"
+					end if
+
+					if(matricula <> "") then
+						cont = cont + 1
+						campos(cont) = " (afast.CO_MATRICULA = '" & matricula & "')"
+					end if
+
+					if(data_de <> "" and data_a <> "") then
+						cont = cont + 1
+						campos(cont) = " (DT_INICIO >= '" & data_de & "' AND DT_FIM <= '"& data_a &"')"
+					end if
+					
+					j=0
+					For i=1 to cont
+						If j=0 then
+							Query = Query & " where " &  campos(i)
+							j=1
+					   Else
+							Query = Query & " and " & campos(i)
+					   End If
+				   Next
+					SQL = SQL & Query
+					SQL = SQL & " ORDER BY NO_NOME"
+					
+					set rs=Server.CreateObject("ADODB.RecordSet")
+					rs.Open SQL, dados_sys, 3, , 32
+					
+					'Response.Write SQL
+				  	if(rs.eof) then
+						Response.Write "Não há dados para os parâmetros selecionados."
+				  	else
+						rs.AbsolutePage = pag
+						'do while(rs.eof = false)
+						do while (not rs.eof and Abs(rs.AbsolutePage - pag) < numPag )
+							afastamento = rs("CO_AFASTAMENTO")
+							usuario = rs("NO_NOME")
+							tipo = rs("DE_TIPO_AFASTAMENTO")
+							data_inicio = rs("DT_INICIO")
+							data_fim = rs("DT_FIM")
+							situacao = rs("DE_SITUACAO")
+							
+							response.Write "<tr>"
+							response.Write "<td>" & afastamento & "</td>"
+							response.Write "<td>" & usuario & "</td>"
+							response.Write "<td>" & tipo &  "</td>"
+							response.Write "<td>" & data_inicio &  "</td>"
+							response.Write "<td>" & data_fim &  "</td>"
+							response.Write "<td>" & situacao &  "</td>"
+							response.Write "</tr>"
+							
+							rs.MoveNext	
+						loop
+				 
+						Controla_Pagina()
+					end if
+			  %>
+            </table>
+          </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%
+  objConn.Close
+  %>
+  <!--fim do corpo-->
+  <!-- #INCLUDE FILE ="rodape.asp" -->
+</div>
+<!--teste-->
+</body>
+</html>
+
+<%
+		Sub Writeln(texto)
+		response.write(texto)
+	End Sub
+	
+	Sub Controla_Pagina()
+	
+		 '****CONTROLE DE PÁGINA
+		  'response.Write(" Pag: " & Pag)
+		  Dim Ult
+		  rs.MoveLast
+		  rs.MoveFirst
+		  Ult = rs.PageCount
+		  'response.Write(" Pag: " & Pag)
+		  'response.Write(" ultima pagina:" & Ult)
+		  If (Pag < 1)   Then Pag = 1
+		  If (Pag > Ult) Then Pag = Ult
+	
+		  WriteLn "	<table style='' >"
+		  WriteLn "		<tr valign=middle>"
+		  WriteLn "		<td>"
+		  Response.Write "<input type='button' class='myButton'"
+		  If (Pag <= numPag) Then Response.Write " disabled "
+		  Response.Write "onClick='JavaScript:window.navigate(""?" & rsSubst(tagPag, CStr(1), "") & """);' value='&lt;&lt;'>"
+	
+				
+		  Response.Write "<input type='button' class='myButton'"
+		  If (Pag <= numPag) Then Response.Write " disabled "
+		  Response.Write "onClick='JavaScript:window.navigate(""?" & rsSubst(tagPag, CStr(Pag - numPag), "") & """);' value='&lt;'>"
+				
+		  WriteLn "		</td>"
+		  WriteLn "		<td>"
+		  Response.Write "p&aacute;gina"
+		  WriteLn "		</td>"
+		  WriteLn "		<td>"
+		  Response.Write "<input size=3 type='text' value='" & CStr(Round(Pag / numPag + 0.5, 0)) & "' onKeyPress='JavaScript:if(window.event.keyCode==13)window.navigate(""?" &  rsSubst(tagPag, """ + (1 + (this.value - 1) * " & numPag & ") + """, "") & """);'>"
+		  WriteLn "		</td>"
+		  WriteLn "		<td>"
+		  if Ult = numPag then
+			 Response.Write "de&nbsp;" & Ult/numPag & Chr(13)
+		  else
+			  Response.Write "de&nbsp;" & CStr(Round(Ult / numPag + 0.5, 0)) & Chr(13)
+		  end if
+		  WriteLn "		</td>"
+		  WriteLn "		<td>"
+	
+		  'response.write Cpf
+		  Response.Write "<input type='button' class='myButton'"
+		  If ((Pag + numPag - 1) >= Ult) Then Response.Write " disabled "
+		  Response.Write "onClick='JavaScript:window.navigate(""?" & rsSubst(tagPag, CStr(Pag + numPag), "") & """);' value='&gt;' >"
+	
+	
+		  
+		  Response.Write "<input type='button' class='myButton'"
+		  If ((Pag + numPag - 1) >= Ult) Then Response.Write " disabled "
+		  WriteLn "onClick='JavaScript:window.navigate(""?" & rsSubst(tagPag, 1 + (CStr(Round(Ult / numPag + 0.5, 0))-1)*numPag, "") & """);' value='&gt;&gt;'>"
+	
+		  WriteLn "		</td>"
+		  WriteLn "		</tr>"
+		  WriteLn "	</table>"
+		  '***** FIM CONTROLA PAGINA
+	
+	End Sub
+
+'******************************************************************************
+  '** FUNÇÃO QUE PERMITE REDIRECIONAR A PÁGINA COM NOVOS PARÂMETROS            **
+  '------------------------------------------------------------------------------
+  Function rsSubst(tag, valor, rqs)
+  	  Dim j
+	  Dim k
+	  Dim rs
+	  
+	  If rqs = "" Then rqs = Request.QueryString
+	  rs = rqs
+	  j = instr(1, rs, tag & "=", 1)
+	  If j > 0 Then
+	    k = instr(j, rs & "&", "&", 1)
+	    rs = left(rs, j - 1) & tag & "=" & valor & mid(rs, k)
+	  Else
+	    If rs <> "" Then rs = rs & "&"
+	    rs = rs & tag & "=" & valor
+	  End If
+	  rsSubst = rs
+  End Function
+  '******************************************************************************
+%>

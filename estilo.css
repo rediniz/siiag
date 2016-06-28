@@ -1,0 +1,612 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	
+
+	background-attachment: fixed;
+	background-image:	-webkit-linear-gradient(85deg, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%), /* linear bottom */
+						-webkit-radial-gradient(40% 60%,ellipse farthest-side, rgba(255, 255, 255, 0.45) -10%, rgba(255, 255, 255, 0) 100%),/* center white */
+						-webkit-radial-gradient(50% -10%,circle farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 30%),/* top center white */
+						-webkit-radial-gradient(100% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%),/* top right white */
+						-webkit-radial-gradient(0% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 10%),/* top left white */
+						-webkit-radial-gradient(90% 60%,ellipse farthest-side, rgba(0, 0, 0, 0.35) -10%, rgba(0, 0, 0, 0) 100%),/* center right black */
+						-webkit-radial-gradient(20% 10%,circle farthest-side, rgba(0, 0, 0, 0.25) -10%, rgba(0, 0, 0, 0) 20%);/* top left black */
+						
+	background-image:	-moz-linear-gradient(85deg, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%), /* linear bottom */
+						-moz-radial-gradient(40% 60%,ellipse farthest-side, rgba(255, 255, 255, 0.45) -10%, rgba(255, 255, 255, 0) 100%),/* center white */
+						-moz-radial-gradient(50% -10%,circle farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 30%),/* top center white */
+						-moz-radial-gradient(100% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%),/* top right white */
+						-moz-radial-gradient(0% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 10%),/* top left white */
+						-moz-radial-gradient(90% 60%,ellipse farthest-side, rgba(0, 0, 0, 0.35) -10%, rgba(0, 0, 0, 0) 100%),/* center right black */
+						-moz-radial-gradient(20% 10%,circle farthest-side, rgba(0, 0, 0, 0.25) -10%, rgba(0, 0, 0, 0) 20%);/* top left black */
+						
+	background-image:	-ms-linear-gradient(85deg, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%), /* linear bottom */
+						-ms-radial-gradient(40% 60%,ellipse farthest-side, rgba(255, 255, 255, 0.45) -10%, rgba(255, 255, 255, 0) 100%),/* center white */
+						-ms-radial-gradient(50% -10%,circle farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 30%),/* top center white */
+						-ms-radial-gradient(100% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%),/* top right white */
+						-ms-radial-gradient(0% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 10%),/* top left white */
+						-ms-radial-gradient(90% 60%,ellipse farthest-side, rgba(0, 0, 0, 0.35) -10%, rgba(0, 0, 0, 0) 100%),/* center right black */
+						-ms-radial-gradient(20% 10%,circle farthest-side, rgba(0, 0, 0, 0.25) -10%, rgba(0, 0, 0, 0) 20%);/* top left black */
+					
+	background-image:	-o-linear-gradient(85deg, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%), /* linear bottom */
+						-o-radial-gradient(40% 60%,ellipse farthest-side, rgba(255, 255, 255, 0.45) -10%, rgba(255, 255, 255, 0) 100%),/* center white */
+						-o-radial-gradient(50% -10%,circle farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 30%),/* top center white */
+						-o-radial-gradient(100% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%),/* top right white */
+						-o-radial-gradient(0% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 10%),/* top left white */
+						-o-radial-gradient(90% 60%,ellipse farthest-side, rgba(0, 0, 0, 0.35) -10%, rgba(0, 0, 0, 0) 100%),/* center right black */
+						-o-radial-gradient(20% 10%,circle farthest-side, rgba(0, 0, 0, 0.25) -10%, rgba(0, 0, 0, 0) 20%);/* top left black */
+					
+	background-image:	linear-gradient(85deg, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%), /* linear bottom */
+						radial-gradient(40% 60%,ellipse farthest-side, rgba(255, 255, 255, 0.45) -10%, rgba(255, 255, 255, 0) 100%),/* center white */
+						radial-gradient(50% -10%,circle farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 30%),/* top center white */
+						radial-gradient(100% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 20%),/* top right white */
+						radial-gradient(0% 0%,ellipse farthest-side, rgba(255, 255, 255, 0.35) -10%, rgba(255, 255, 255, 0) 10%),/* top left white */
+						radial-gradient(90% 60%,ellipse farthest-side, rgba(0, 0, 0, 0.35) -10%, rgba(0, 0, 0, 0) 100%),/* center right black */
+						radial-gradient(20% 10%,circle farthest-side, rgba(0, 0, 0, 0.25) -10%, rgba(0, 0, 0, 0) 20%);/* top left black */
+
+	background-color:#65a4d2;
+
+
+
+	margin:0px;
+	padding:0px;
+	font-family:Futura,Arial,Verdana;
+	/*background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
+	background:-moz-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:-webkit-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:-o-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);*/
+}
+
+
+
+@font-face {
+    font-family: 'Futura';
+    src: url('fontes/futuran.eot');
+    src: url('fontes/futuran.eot?#iefix') format('embedded-opentype'),
+         url('fontes/futuran.woff') format('woff'),
+         url('fontes/futuran.ttf') format('truetype'),
+         url('fontes/futuran.svg#futura_bk_btbook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+.cabecalhoprincipal{
+	
+	width::100%;
+	height:118px;/*altura do cabecalho e do menu como um todo */
+
+}
+
+
+
+.cabecalhoinside{
+
+	width:1024px;
+	height:120px;
+	margin:auto;
+	
+
+}
+
+.imagetop{
+	width:1024px;
+	height:80px;
+	margin:auto;
+	
+}
+
+
+.corposite{
+
+	margin-top:0px;
+	width:100%;
+	height:auto/*650px*/;
+ 
+
+}
+
+.conteudo{
+
+	
+	width:72%;
+	height:100%;
+	min-height:500px;
+	margin-left:9px;
+	background:#FFFFFF;
+	float:left; 
+	clear:both;
+	border-radius:10px;
+	margin-bottom:3%;
+}
+
+.conteudo2{
+	
+	width:98%;
+	height:100%;
+	margin-left:9px;
+	background:#FFFFFF;
+	margin-top:0px;
+	border-radius:10px;
+	padding-top: 1px; 
+	padding-bottom:3px;
+	margin-bottom:3%;
+	margin-bottom:auto;
+}
+ 
+.calendario{
+	background:#5683c4;
+	width:25%; 
+	height:100%; 
+	margin-left:74%;
+	border-radius:10px;
+	box-shadow: 0px 0px 0px 0px black;  
+
+}
+
+
+
+
+.rodape{
+	
+	
+	width:100%;
+	height:50px;
+	color:#FFFFFF;
+	border-radius:10px;
+	clear:both;
+
+}
+
+.mensagemrodape{
+	margin:auto; 
+	height:100%; 
+	width:1024px; 
+	background-color:#0d3f88;
+	border-radius:10px;
+	
+}
+
+.mensagem{
+	text-align:center; 
+	margin-top:5px; 
+	margin-bottom:5px;
+	font-family: Futura,Arial;
+
+}
+
+
+
+.menu{
+	width:100%;
+	height:20px;
+	background-image:url(imagens/barra.jpg);
+	clear:both;
+	margin-top:0px;
+	border-radius:0px;
+
+
+}
+
+.menucentralizado{
+	margin:auto; 
+	background-image:url(imagens/barra_cinza.jpg);
+	
+		
+}
+
+.menuinside{/* altura da barra de baixo do menu*/
+	height:22px;
+	width:100%;
+	border-bottom:#0e4089 solid 1px; 
+
+}
+
+
+
+.listamenu li{
+	list-style:none;
+	clear:both;
+	display:inline;
+	margin:20px;
+	font-family: Futura,Arial,Verdana;
+
+}
+
+
+
+
+
+.container2{
+	height:100%;
+	width:1024px; 
+	margin:auto; 
+}
+
+
+.linhavertical{
+	height:565px;
+	float:left;
+
+}
+
+.divAgenda{
+	
+	float:left; 
+	width:48%; 
+	height:93%;
+
+	margin-left:2%;
+	/*border:#000000 solid 1px;*/
+	
+}
+
+.divFeriasAusencias{
+	
+	float:left;
+	margin-right:3%;
+
+	height:93%;
+	/*border:#000000 solid 1px;*/
+	
+	
+	
+
+
+}
+
+
+.teste{
+	border:#000000 solid 1px; 
+	margin: auto; 
+	width:1027px; 
+	background:#0d3f88;
+	box-shadow: 0px 0px 8px 0px black;
+	border-radius: 10px; 
+	min-height:500px;
+	padding-bottom:7%;/*aqui nao tem nada*/ /*distancia entre o fundo azul e o gradiente atras do fundo azul */
+}
+
+.teste2{
+	border:#000000 solid 1px; /*paginas que precisam crescer */
+	margin: auto; 
+	width:1027px; 
+	background:#0d3f88;
+	box-shadow: 0px 0px 16px 0px black;
+	border-radius: 10px; 
+	height:auto;
+	padding-bottom:1.0%;/*aqui nao tem nada*/ 
+}
+
+
+.calendar{
+	margin-left:8.5%;
+	margin-top:5%;
+	float:left;
+}
+
+.formvisuusuario{
+	margin-left:5%; 
+	margin-top:10%;
+}
+.usuariodiv{
+	/*border:#000000 solid 1px;*/ /*borda preta que atrapalhava, para uso futuros */
+	height:100%;
+}
+
+
+
+.imgaddemprestimo{
+	float:right; 
+	margin-right:30%; 
+	margin-top:0.8%;
+	
+}
+.imgaddemprestimo:active{
+	margin-right:29.8%;/*para fazer o movimento da imagem ao ser clicada */
+} 
+
+a, a:visited {
+	text-decoration:none;
+	outline:none;
+	color:#54a6de;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+section, footer, nav{
+	display: block;
+}
+
+
+/*----------------------------
+	O Menu de Navegacao
+-----------------------------*/
+#colorNav > ul{
+	width: 450px; /* Original = 450 Aumentar quando forem adicionados mais itens de menu */
+	margin:0 auto;
+	display: inline;
+	font-family:Futura,Verdana, Arial;
+	
+}
+
+#colorNav > ul > li{ /* estiliza apenas o o li mais acima */
+	list-style: none;
+	
+	display: inline-block;
+	line-height: 20px; /* posiciona o texto verticalmente */
+	margin-left:2px;
+	border-radius: 3px;
+	position:relative;
+	margin-top:2px;
+	vertical-align: middle;
+}
+
+#colorNav > ul > li > a{
+	text-decoration:none !important;
+	font-size:18px;
+	padding:35px; /*quando colocar mais itens no menus diminuir esse padding, antes era 20 agora é 5*/
+	padding-top:0px;
+	padding-left:10px;
+	padding-bottom:3px;
+	color:#333;
+	/*border: #00FF00 solid 2px;*/
+}
+
+#colorNav > ul > li > a:hover{
+	color:#6d6c6c;
+}
+
+#colorNav li ul{ /*posicionamento da lista de sub-menu */
+	position:absolute;
+	list-style:none;
+	text-align:center;
+	width:180px;
+	left:30%;
+	margin-left:-100px;
+	top:5px;
+	
+	z-index:1;	
+	
+	/* Importante para o efeito de mostrar/esconder  */
+	max-height:0px;
+	overflow:hidden;
+	
+	-webkit-transition:max-height 0.4s linear;
+	-moz-transition:max-height 0.4s linear;
+	transition:max-height 0.4s linear;
+}
+
+#colorNav li ul li{
+	background-color:#205095/*#0d3f88; /*cor dos ultimos */
+}
+
+#colorNav li ul li a{
+	padding:12px;
+	color:#fff !important;
+	text-decoration:none !important;
+	display:block;
+}
+
+#colorNav li ul li:nth-child(odd){ /* zebra stripes */
+	background-color:#23559e;/*cor dos primeiros*/
+}
+
+#colorNav li ul li:hover{
+	background-color:#3165af;
+}
+
+#colorNav li ul li:first-child{
+	border-radius:3px 3px 0 0;
+	margin-top:25px;
+	position:relative;
+}
+
+#colorNav li ul li:first-child:before{ /* the pointer tip */
+	content:'';
+	position:absolute;
+	width:1px;
+	height:1px;
+	border:5px solid transparent;
+	border-bottom-color:#23559e; /*cor da seta*/
+	left:50%;
+	top:-10px;
+	margin-left:-5px;
+	
+}
+
+#colorNav li ul li:last-child{
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/* Gatilho do CSS */
+/* "animacao" da transicao ao hover */
+
+/*#ALTERADO EM 02/05/2016*/
+#colorNav li:hover ul{
+	max-height:350px; /*aumentar se colocar mais itens de submenus */
+}
+/* Fim CSS Menu*/
+
+
+/*----------------------------
+	O Menu de Navegacao colorNavOUTROS
+-----------------------------*/
+#colorNavOUTROS > ul{
+	width: 450px; /* Original = 450 Aumentar quando forem adicionados mais itens de menu */
+	margin:0 auto;
+	display: inline;
+	font-family:Futura,Verdana, Arial;
+	
+}
+
+#colorNavOUTROS > ul > li{ /* estiliza apenas o o li mais acima */
+	list-style: none;
+	
+	display: inline-block;
+	line-height: 20px; /* posiciona o texto verticalmente */
+	margin-left:2px;
+	border-radius: 3px;
+	position:relative;
+	margin-top:2px;
+	vertical-align: middle;
+}
+
+#colorNavOUTROS > ul > li > a{
+	text-decoration:none !important;
+	font-size:18px;
+	padding:90px; /*quando colocar mais itens no menus diminuir esse padding, antes era 20 agora é 5*/
+	padding-top:0px;
+	padding-left:10px;
+	padding-bottom:3px;
+	color:#333;
+	/*border: #00FF00 solid 2px;*/
+	
+	}
+
+#colorNavOUTROS > ul > li > a:hover{
+	color:#6d6c6c;
+}
+
+#colorNavOUTROS li ul{ /*posicionamento da lista de sub-menu */
+	position:absolute;
+	list-style:none;
+	text-align:center;
+	width:180px;
+	left:30%;
+	margin-left:-120px;
+	top:5px;
+	
+	z-index:1;	
+	
+	/* Importante para o efeito de mostrar/esconder  */
+	max-height:0px;
+	overflow:hidden;
+	
+	-webkit-transition:max-height 0.4s linear;
+	-moz-transition:max-height 0.4s linear;
+	transition:max-height 0.4s linear;
+}
+
+#colorNavOUTROS li ul li{
+	background-color:#205095/*#0d3f88; /*cor dos ultimos */
+}
+
+#colorNavOUTROS li ul li a{
+	padding:12px;
+	color:#fff !important;
+	text-decoration:none !important;
+	display:block;
+}
+
+#colorNavOUTROS li ul li:nth-child(odd){ /* zebra stripes */
+	background-color:#23559e;/*cor dos primeiros*/
+}
+
+#colorNavOUTROS li ul li:hover{
+	background-color:#3165af;
+}
+
+#colorNavOUTROS li ul li:first-child{
+	border-radius:3px 3px 0 0;
+	margin-top:25px;
+	position:relative;
+}
+
+#colorNavOUTROS li ul li:first-child:before{ /* the pointer tip */
+	content:'';
+	position:absolute;
+	width:1px;
+	height:1px;
+	border:5px solid transparent;
+	border-bottom-color:#23559e; /*cor da seta*/
+	left:50%;
+	top:-10px;
+	margin-left:-5px;
+	
+}
+
+#colorNavOUTROS li ul li:last-child{
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/* Gatilho do CSS */
+/* "animacao" da transicao ao hover */
+
+#colorNavOUTROS li:hover ul{
+	max-height:300px; /*aumentar se colocar mais itens de submenus */
+}
+/* Fim CSS Menu*/
+
+
+/* css da div usuario*/
+
+.dadosdousuario{
+	position:absolute; 
+	float:left;
+	margin-top:35px;
+	height:70px;
+	width:1024px;
+} 
+
+.dadosdousuario p {/*dado uma especie de letter-spacing  */
+	margin:4px;
+	margin-left:70%;
+	font-family:Futura, Arial, Verdana;
+	font-size:15px;
+	
+} 
+
+/*fim do css da div usuario */
+
+
+.titulos{/*css que sera utilizado para os titulos da pagina inicial */
+	font-family: Futura, Arial, Helvética;
+	color: #5683C4;
+	
+} 
+
+.titulosModulos{/*css que sera utilizado para os titulos da pagina inicial */
+	font-family: Futura, Arial, Helvética;
+	color: #ff8223;
+	font-size:18px;
+	margin-left:10px;
+	margin-top:10px;
+	text-align:left;
+ 	margin-right:10px;	
+	border:#000000 solid 0px;
+} 
+
+
+#datepicker{width:60px; float:right;height:50px; margin-right:19%;}
+
+.img_usuario{float:right;height:100px;width:100px;margin-right:8%;}
+
+.subtitulosAgenda{font-size:15px; color:#f89514;}
+.linhaSeparadora{background:#3c92f4;box-shadow: 0px 0px 2px 0px black;}
+.buscadorTelefone{background:#FFFFFF;border:#000000 solid 1px;float:right;width:240px;height:300px;margin-top:20%;margin-right:1.7%;}
+.textosAgenda{font-family:Verdana, Arial;font-size:12px;list-style:none;}
+.aniversariantes{clear:both;}
+.aniversariantes h3{margin-left:5%;}
+.linksRapidos{/*border:#FFFFFF solid 1px;*/ float:right; margin-top:18%; width:260px;margin-right:6px;background:#477fbf; border-radius:10px;height:764px;}
+.linksRapidos h3{color:#f89514;margin-left:5px;}
+.linksRapidos a{margin-left:5px; color:#ffffff;}
+.tituloAniversariantesDia{font-family:Futura;text-align:center;}
+.nomeDia{margin-left:11px;color:#FFFFFF; font-family:Arial, Verdana;font-size:14px;}
+
+.tituloRelatorio{color:black; font-family:Futura;text-align:center;}
+.labelsRelatorio{/*border:#000000 solid 1px;*/margin:auto;width:500px;}
+
+
+
+
+

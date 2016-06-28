@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Calendar</title>
+</head>
+<body>
+
+<form id="CalForm" method="POST" action="">
+<script type="text/javascript" language="JavaScript1.2" src="acecalendar.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+
+var oCal_1 = new AceCalendar();
+oCal_1.setName("oCal_1");
+oCal_1.setFormName("CalForm");
+oCal_1.setStyle(0, "#000000", "#000000", "#FFFFFF", 0, 0);
+oCal_1.setStyle(1, "#888888", "#888888", "#FFFFFF", 0, 0);
+oCal_1.setStyle(2, "#888888", "#FFFF00", "#000000", 0, 1);
+oCal_1.setStyle(3, "#AA0000", "#AA0000", "#FFFFFF", 0, 1);
+oCal_1.setStyle(4, "#0000AA", "#0000AA", "#FFFFFF", 0, 0);
+oCal_1.setFont("Helvetica, sans-serif", "10pt");
+oCal_1.display();
+
+oCal_1.setAction	 = function()
+{
+	var oForm = opener.document.forms.myForm;
+	if (oForm != null)
+	{
+		if (oForm.elements.popup_date != null)
+			oForm.elements.popup_date.value = this.getString();
+	}
+}
+
+</script>
+</form>
+
+<div align=right><font size="-1"><a href="javascript:close()">Close</a></font></div>
+
+</body>
+</html>

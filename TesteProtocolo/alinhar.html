@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript" src="scripts/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    var max = 0;
+    $("label").each(function(){
+        if ($(this).width() > max)
+            max = $(this).width();    
+    });
+    $("label").width(max);
+});
+</script>
+
+<style>
+label, input[type="text"]{
+    float:left;
+    display:block;
+}
+label
+{
+    margin-right: 5px;
+}
+.field{
+    width:100%;
+    overflow:auto;
+    margin:5px 0px;
+}
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<p>
+    <label>Name</label>
+    <input name="" type="text" />
+  </p>
+<p>&nbsp;</p>
+  <p>
+    
+    
+    <label>E-mail s</label>
+    <input name="" type="text" />
+  </p>
+  <p>&nbsp;</p>
+  <p>
+    <label>Website</label>
+    <input name="" type="text" />
+  </p>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+/* CSS Document */
+
+body {
+	margin:0;
+	padding:0;
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-family:Futura,Arial,Verdana;
+}
+
+
+
+
+
+.abaCentro {
+	background-image:url(imagens/abas_off_centro.png);
+	height:38px;
+	width:8px;
+	background-repeat:repeat-x;
+	/*font-weight:bold;*/
+	color:#002884;
+	padding-top:15px;
+	cursor:pointer;
+	font-size:14px;
+	
+	
+}
+
+.abaEsquerda {
+	background-image:url(imagens/abas_off_esquerda.png);
+	height:38px;
+	width:10px;
+	background-repeat:no-repeat;
+	font-size:11px;
+	
+}
+
+.abaDireita {
+	background-image:url(imagens/abas_off_direita.png);
+	height:38px;
+	width:11px;
+	background-repeat:no-repeat;
+	font-size:11px;
+}
+
+.abaCentro:hover{color:#FFFFFF;}
+
+.aba {
+	background-image:url(imagens/bg_abas.png);
+	font-size:11px;
+	margin-top:7px;
+	/*width:98%; tamanho da aba*/
+	/*margin-left:5px; distancia da borda esquerda da div central */
+}
+
+.abaCentroOn {
+	background-image:url(imagens/abas_on_centro.png);
+	height:38px;
+	width:8px;
+	background-repeat:repeat-x;
+	/*font-weight:bold;*/
+	color:#fff;
+	padding-top:12px;
+	cursor:pointer;
+	font-size:14px;
+}
+
+.abaEsquerdaOn {
+	background-image:url(imagens/abas_on_esquerda.png);
+	height:38px;
+	width:9px;
+	background-repeat:no-repeat;
+	font-size:11px;
+	
+}
+
+.abaDireitaOn {
+	background-image:url(imagens/abas_on_direita.png);
+	height:38px;
+	width:11px;
+	background-repeat:no-repeat;
+	font-size:11px;
+}
+
+.paragrafoteste{
+
+padding-left:10px;
+
+
+}
+.submenu{
+
+background-color:#F7F7F7;
+text-align:center;
+height:20px;
+}
+
+.submenu3  tr td {
+    border:#5683C4 solid 1px;}
+
+.submenu3  tr th {
+    border:#5683C4 solid 1px;}
+
+.link:visited{color:#5683C4;}
