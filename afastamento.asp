@@ -22,6 +22,7 @@
 <script src="scripts/jquery-1.9.1.js"></script>
 <script src="scripts/jquery.ui.datepicker.js"></script>
 <script src="scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="scripts/jquery.ui.spinner.js"></script>
 <style>
 .ui-datepicker {
 	font-size: 12px;
@@ -138,12 +139,14 @@
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 		
-		$("#tipo_afastamento").on("change", function(){
-			if($(this).val() == 17){
-				$("#quantidadeHoras").show();
-			}else{
-				$("#quantidadeHoras").hide();	
-			}
+		// Spinner
+		var spinner = $( "#quantidadeHoras" ).spinner({
+			spin: function( event, ui ) {
+				if ( ui.value < 0 ) {
+					$( this ).spinner( "value", 0 );
+					return false;
+				}
+			}			
 		});
 		
 		//#Alterado: adicionado.
@@ -188,7 +191,7 @@
 				var documentoOpcional = ["13", "4", "7"];
 
 				if ($("#tipo_afastamento").val() == "37" || $("#tipo_afastamento").val() == "13")
-				{			
+				{		
 					$("#linha_tre").show();
 					$.ajax({
 						method: "POST",
@@ -225,6 +228,12 @@
 				}else{
 					$("#linhaDocumento").hide();
 					necessitaDocumento = false;
+				}
+
+				if($("#tipo_afastamento").val() == "17"){
+					$("#linhaQuantidadeHoras").show();
+				}else{
+					$("#linhaQuantidadeHoras").hide();	
 				}
 		});	
 		
@@ -337,6 +346,25 @@ $(document).on("click","#solicitar", function(){
 			documentos.append("documento", this.files[0]);
 		}
 	});
+	
+	if($("#tipo_afastamento").val() == "17"){
+		$.ajax({
+			method: "POST",
+			url: "acompanhamento_medico.asp?acao=consultarSaldo&matricula="+$("#matricula").val(),
+			success: function(data) {
+				var objeto = $.parseJSON(data.responseText),
+					saldo  = objeto.saldo;
+				if($("#quantidadeHoras").val() > saldo){
+					alert("A quantidade de horas informada é maior do que o seu saldo de horas atual.");
+					return false;
+				}
+			},
+			error: function(data){ // CASO OCORRA ERRO NA REQUISIÇÃO
+				alert("Erro ao carregar saldo de horas para Acompanhamento Médico.");
+				console.log(data.responseText);
+			}
+		})
+	}
 	
 	$.ajax({
 		url: "afastamento_salvar.asp?"+$("#formulario").serialize(),
@@ -487,7 +515,10 @@ $(document).on("click","#solicitar", function(){
                     <input  name="data_fim" id="data_fim" class="datepicker" type="text" size="8" maxlength="8"  value="<% Response.Write(Date) %>"/>
                     <label></label></td>
                 </tr>
-               
+                <tr id="linhaQuantidadeHoras" style="display:none">
+                    <td><label for="quantidadeHoras">Quantidade<br /> de horas: </label></td>
+                    <td><input style="width:20px;height:20px;font-size:14px;" id="quantidadeHoras" name="quantidadeHoras" value=0></td>
+                </tr>
                 <tr>
                   <td><br/></td>
                   <td><br/>
