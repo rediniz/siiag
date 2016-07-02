@@ -1,13 +1,24 @@
 <!-- #INCLUDE FILE ="include/conexao.asp" -->
 <%
  				
-data_inicio = Request("data_inicio")
-data_fim = Request("data_fim")
-nome = Request("nome")
-matricula = Request("matricula")
-tipo_afastamento = Request("tipo_afastamento")
-co_afastamento = Request("co_afastamento")
-situacao = Request("situacao")
+	data_inicio = Request("data_inicio")
+	data_fim = Request("data_fim")
+	nome = Request("nome")
+	matricula = Request("matricula")
+	tipo_afastamento = Request("tipo_afastamento")
+	co_afastamento = Request("co_afastamento")
+	situacao = Request("situacao")
+	qtdHorasAcompanhamento = request("quantidadeHoras")
+	atestadoDigitalizado = request("atestadoDigitalizado")
+	atestadoDevolvido = request("atestadoDevolvido")
+
+	if (atestadoDigitalizado) = "" then
+		atestadoDigitalizado = 0
+	end if
+	
+	if (atestadoDevolvido) = "" then
+		atestadoDevolvido = 0
+	end if
 
 '#ALTERADO em 23/03/2016 (adicionado)=============#
 	dt_ini_atdmt = Request("dt_ini_atdmt")
@@ -55,7 +66,7 @@ if (tipo_afastamento = "37" or tipo_afastamento = "13") and situacao = "7" and c
 	end if
 end if
 
-	query = "UPDATE TB_AFASTAMENTOS SET CO_TIPO_AFASTAMENTO='"&tipo_afastamento&"', DT_INICIO='"&data_inicio&"', DT_FIM='"&data_fim&"', CO_SITUACAO="&situacao&", DT_INI_ATDMT = '"&dt_ini_atdmt&"', dt_prev_conc = '"&dt_prev_conc&"', obs_edicao = '"&observacaoEdicao&"'"
+	query = "UPDATE TB_AFASTAMENTOS SET CO_TIPO_AFASTAMENTO='"&tipo_afastamento&"', DT_INICIO='"&data_inicio&"', DT_FIM='"&data_fim&"', CO_SITUACAO="&situacao&", DT_INI_ATDMT = '"&dt_ini_atdmt&"', dt_prev_conc = '"&dt_prev_conc&"', obs_edicao = '"&observacaoEdicao&"',QTD_HORAS_ACOMPANHAMENTO =  "&qtdHorasAcompanhamento&", ATESTADO_DIGITALIZADO = "&atestadoDigitalizado&", ATESTADO_DEVOLVIDO = "&atestadoDevolvido&""
 
 	select case situacao
 	

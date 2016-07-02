@@ -169,6 +169,23 @@ overflow-x:hidden;
 
 <script>
 	$(document).ready(function(){
+		
+	window.carregarHistoricoAcompanhamento = function(){
+		$.ajax({
+			method: "POST",
+			url: "acompanhamento_medico.asp?acao=carregarHistorico&matricula="+$("#matricula").val(),
+			success: function(data) {
+				$("#historicoAcompanhamentoMedico").html(data);
+			},
+			error: function(data){
+				alert("Erro ao carregar histórico de horas para Acompanhamento Médico.");
+				console.log(data.responseText);
+			}
+		})	
+	}
+	
+	carregarHistoricoAcompanhamento();
+	
 	$("#salvar").on('click',function(){
 	
 	
@@ -377,7 +394,7 @@ $(document).ready(function(){
 					$('#frame_contatos').attr('src','usuario_contatos.asp?usuario=' + $("#matricula").val());
 					$('#frame_perfis').attr('src','usuario_perfis_nov.asp?usuario=' + $("#matricula").val());
 					$('#frame_tre').attr('src','tre_historico.asp?co_matricula=' + $("#matricula").val());
-					
+
 					return false;				
 					}
 				  });
@@ -436,6 +453,8 @@ $(document).ready(function(){
 					$('#frame_contatos').attr('src','usuario_contatos.asp?usuario=' + $("#matricula").val());
 					$('#frame_perfis').attr('src','usuario_perfis_nov.asp?usuario=' + $("#matricula").val());
 					$('#frame_tre').attr('src','tre_historico.asp?co_matricula=' + $("#matricula").val());
+					
+					window.carregarHistoricoAcompanhamento();
 					
 					return false;				
 					}
@@ -497,6 +516,7 @@ $(document).ready(function(){
 					//document.getElementById('frame_perfis').attributes["src"].value  = "usuario_perfis.asp?usuario=" + ui.item.matricula;
 					//window.frames['frame_perfis'].location.reload();
 					//alert("imagens//usuarios//" + ui.item.foto + "");
+					window.carregarHistoricoAcompanhamento();
 					return false;
 					}
 				  });		
@@ -938,7 +958,7 @@ if perfil_acesso_siiag then
                           <img style='border:#b9d3f0 solid 3px; padding:0px;max-width:110px;min-width:110px;' id='foto' src='<% =imagem%>'  />
                       <%end if%>
                       <%if perfil_acesso_admin_siiag or (request.Cookies("ic_gerente_siiag") and request.Cookies("co_usuario_gs_siiag") = cStr(coordenacao) ) then %>
-                      <a href="#dialog" name="modal"><br><INPUT style="display:none;" type="button" name="bt_editar_foto" id="bt_editar_foto" value="Editar foto"  class="myButton" style="padding:3px; font-size:13px; height:25px; width:108px;" tabindex="12" ></a>
+                      <a href="#dialog" name="modal"><br><input style="display:none;" type="button" name="bt_editar_foto" id="bt_editar_foto" value="Editar foto"  class="myButton" style="padding:3px; font-size:13px; height:25px; width:108px;" tabindex="12" ></a>
                       <%end if%>
     
                   </td>
@@ -1072,7 +1092,7 @@ if perfil_acesso_siiag then
             </tr>
             <tr>
                <td valign="top">
-                    <fieldset class="testess" style=" border-color: #FFCC66; border:#FFCC66 1px solid; border-radius:4px; padding:5px; width:980px; height:200px;">            
+                    <fieldset class="testess" style=" border-color: #FFCC66; border:#FFCC66 1px solid; border-radius:4px; padding:5px; width:980px;">            
                     <legend class="style2 style3">Dados Gerais</legend>
                     <table cellpadding="2px;" border="0" width="100%">
                     <tr>
@@ -1090,6 +1110,9 @@ if perfil_acesso_siiag then
                         </td>
                     </tr>
                     </table>
+                    <br /><br />                                    
+                    <div id="historicoAcompanhamentoMedico" style="width:350px; overflow:auto">
+                    </div>
                     </fieldset>
                 </td>
             </tr>

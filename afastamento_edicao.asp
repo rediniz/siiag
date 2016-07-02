@@ -23,6 +23,7 @@
 <script src="scripts/jquery-1.9.1.js"></script>
 <script src="scripts/jquery.ui.datepicker.js"></script>
 <script src="scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="scripts/jquery.ui.spinner.js"></script>
 
 <style>
 body{
@@ -110,27 +111,78 @@ overflow-x:hidden;
 <script type="text/javascript">
 	$(document).on("click","#salvar", function(){
 		
+		
 		salvar = window.confirm("Confirmar edição?");
 		
 		if(salvar){
-			//$.ajax({
-//				type: "POST",
-//				url: 'afastamento_edicao_con.asp',
-//				data:  $("#formulario").serialize(),
-//				success: function (data) {
-//					alert("Edição realizada com sucesso.");
-//					window.close();
-//            	},	
-//				error: 	function (data) {
-//					alert("Erro ao editar afastamento.");
-//            	}		    
-//  			});
-			formulario.submit();
-			alert("Edição realizada com sucesso.");
-			window.opener.location.reload();
-            window.close();
+			
+		if($("#ic_aviso_assinado").prop("checked")==false || $("#ic_requerimento").prop("checked")==false){
+			alert("Não é possível finalizar esse pedido até que todos os requerimentos sejam cumpridos.");
+			return false;
+		}
+		
+		if($("#ic_aviso_assinado").prop("checked")==false || $("#ic_requerimento").prop("checked")==false){
+			alert("Não é possível finalizar esse pedido até que todos os requerimentos sejam cumpridos.");
+			return false;
+		}
+			
+		if($("#tipo_afastamento").val() == "17"){
+			$.ajax({
+				method: "POST",
+				url: "acompanhamento_medico.asp?acao=consultarSaldo&matricula="+$("#matricula").val(),
+				success: function(data) {
+					var objeto = $.parseJSON(data),
+						saldo  = objeto.saldo;
+					if($("#quantidadeHoras").val() > parseInt(saldo, 10)){
+						alert("Você não tem saldo suficiente de horas para esta solicitação.");
+					return false;
+				}
+				},
+				error: function(data){ // CASO OCORRA ERRO NA REQUISIÇÃO
+					alert("Erro ao carregar saldo de horas para Acompanhamento Médico.");
+					console.log(data.responseText);
+				}
+			})
+		}
+			$.ajax({
+				type: "POST",
+				url: 'afastamento_edicao_con.asp',
+				data:  $("#formulario").serialize(),
+				success: function (data) {
+					alert("Edição realizada com sucesso.");
+					if($("#situacao").val() == 2){
+						atualizarSaldoHoras($("#matricula").val(), $("#co_afastamento").val(), $("#quantidadeHoras").val());
+					}else{
+						window.opener.location.reload();
+						window.close();
+					}
+            	},	
+				error: 	function (data) {
+					console.log(data.responseText);
+					alert("Erro ao editar afastamento.");
+            	}		    
+  			});
+			//formulario.submit();
+			
+
 		} else{
 			return false;
+		}
+		
+		function atualizarSaldoHoras(matricula, afastamento, quantidadeHoras){
+			$.ajax({
+			method: "POST",
+			url: "acompanhamento_medico.asp?acao=debitarHoras&matricula="+matricula+"&quantidadeHoras="+quantidadeHoras+"&afastamento="+afastamento,
+			success: function(data) {
+					alert("Saldo de horas para Acompanhamento Médico atualizado.");
+					window.opener.location.reload();
+					window.close();
+			},
+			error: function(data){
+				alert("Erro ao atualizar saldo de horas para Acompanhamento Médico.");
+				console.log(data.responseText);
+			}
+		})
 		}
 		
 		});
@@ -140,6 +192,15 @@ overflow-x:hidden;
 
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
+		
+		var spinner = $( "#quantidadeHoras" ).spinner({
+			spin: function( event, ui ) {
+				if ( ui.value < 0 ) {
+					$( this ).spinner( "value", 0 );
+					return false;
+				}
+			}			
+		});
 				//Ao digitar executar essa função
 				$("#nome").focus().autocomplete({
 					
@@ -162,7 +223,15 @@ overflow-x:hidden;
 					return false;
 					}
 				  }); 
-			});
+		$("#tipo_afastamento").on("change", function(){
+			  var matricula = $("#matricula").val();
+			 if($("#tipo_afastamento").val() == "17"){
+					$("#linhaQuantidadeHoras").show();
+				}else{
+					$("#linhaQuantidadeHoras").hide();	
+				}
+		});
+	});
 	</script>
 
 <script>
@@ -231,7 +300,7 @@ overflow-x:hidden;
   	end if
   
 	'#ALTERADO EM 30/11/2015 (select agora pega as datas de inicio e prev_conc da demanda)#
-  	query = "SELECT USUARIO.CO_MATRICULA, USUARIO.CO_DIGITO, USUARIO.NO_NOME,  AFASTAMENTO.CO_TIPO_AFASTAMENTO, AFASTAMENTO.OBS_EDICAO, AFASTAMENTO.DT_INICIO, AFASTAMENTO.DT_FIM, AFASTAMENTO.CO_SITUACAO, AFASTAMENTO.DT_INI_ATDMT, AFASTAMENTO.dt_prev_conc, AFASTAMENTO.ATESTADO_DIGITALIZADO, AFASTAMENTO.ATESTADO_DEVOLVIDO FROM TB_AFASTAMENTOS AS AFASTAMENTO JOIN VW_USUARIOS AS USUARIO ON USUARIO.CO_MATRICULA = AFASTAMENTO.CO_MATRICULA INNER JOIN TB_SITUACOES SIT ON AFASTAMENTO.CO_SITUACAO = SIT.CO_SITUACAO WHERE CO_AFASTAMENTO="&request("co_afastamento")
+  	query = "SELECT USUARIO.CO_MATRICULA, USUARIO.CO_DIGITO, USUARIO.NO_NOME,  AFASTAMENTO.CO_TIPO_AFASTAMENTO, AFASTAMENTO.OBS_EDICAO, AFASTAMENTO.DT_INICIO, AFASTAMENTO.DT_FIM, AFASTAMENTO.CO_SITUACAO, AFASTAMENTO.DT_INI_ATDMT, AFASTAMENTO.dt_prev_conc, AFASTAMENTO.ATESTADO_DIGITALIZADO, AFASTAMENTO.ATESTADO_DEVOLVIDO, AFASTAMENTO.QTD_HORAS_ACOMPANHAMENTO FROM TB_AFASTAMENTOS AS AFASTAMENTO JOIN VW_USUARIOS AS USUARIO ON USUARIO.CO_MATRICULA = AFASTAMENTO.CO_MATRICULA INNER JOIN TB_SITUACOES SIT ON AFASTAMENTO.CO_SITUACAO = SIT.CO_SITUACAO WHERE CO_AFASTAMENTO="&request("co_afastamento")
 	
 	resultado 					= objConn.execute(query)
 	co_matricula 				= resultado("CO_MATRICULA")
@@ -243,6 +312,9 @@ overflow-x:hidden;
 	co_situacao					= resultado("CO_SITUACAO")
 	atestado_digitalizado		= resultado("ATESTADO_DIGITALIZADO")
 	atestado_devolvido			= resultado("ATESTADO_DEVOLVIDO")
+	qtdHorasAcompanhamento		= resultado("QTD_HORAS_ACOMPANHAMENTO")
+	tsAtestadoDigitalizado		= resultado("ATESTADO_DIGITALIZADO")
+	tsAtestadoDevolvido			= resultado("ATESTADO_DEVOLVIDO")
 	
 	'#ALTERADO EM 30/11/2015 (adicionado)#
 	dt_ini_atdmt = resultado("DT_INI_ATDMT")
@@ -282,7 +354,7 @@ overflow-x:hidden;
          <label>Tipo:</label></td>
          <td align="left">
 
-    	<select name='tipo_afastamento' class='form-select'>
+    	<select id = 'tipo_afastamento' name='tipo_afastamento' class='form-select'>
 <%
 			if (co_tipo_afastamento = "37" or co_tipo_afastamento = "13") or co_situacao = "7" then
 				strQuery = 		"select CO_TIPO_AFASTAMENTO, DE_TIPO_AFASTAMENTO, CO_CAIXA  from TB_TIPOS_AFASTAMENTO WHERE IC_ATIVO = 1 and co_tipo_afastamento = " & co_tipo_afastamento & "  ORDER BY DE_TIPO_AFASTAMENTO; " 'Selecionando o campo descricao do recurso da tabela tipos_recursos 	
@@ -343,6 +415,18 @@ overflow-x:hidden;
           <label></label>             
 
       </td>
+    </tr>
+    <tr id="linhaQuantidadeHoras" <% if co_tipo_afastamento <> 17 then %> style="display:none" <% end if %>>
+      <td><label for="quantidadeHoras">Quantidade<br /> de horas: </label></td>
+      <td><%if isnull(qtdHorasAcompanhamento) then qtdHorasAcompanhamento = 0 end if %><input style="width:20px;height:20px;font-size:14px;" id="quantidadeHoras" name="quantidadeHoras" value=<%=qtdHorasAcompanhamento%>></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="checkbox"  id="atestadoDigitalizado" name="atestadoDigitalizado"  value = "1" <% if tsAtestadoDigitalizado = "True" Then Response.Write "checked" END IF %>/><label for="atestadoDigitalizado">Atestado digitalizado e email encaminhado à GIPES</label>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="checkbox"  id="atestadoDevolvido" name="atestadoDevolvido"  value = "1" <% if tsAtestadoDevolvido = "True" Then Response.Write "checked" END IF %>/><label for="atestadoDevolvido">Atestado devolvido ao empregado</label>
+        </td>
     </tr>
    	<tr>
    	  <td align="left"><label>Situação:</label></td>

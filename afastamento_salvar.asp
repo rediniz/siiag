@@ -13,6 +13,8 @@
 	data_inicio = request("data_inicio")
 	data_fim = request("data_fim")
 	tipo_afast = request("tipo_afastamento")
+	
+	qtdHorasAcompanhamento = request("quantidadeHoras")
 
 	data = day(date()) & "/" & month(date()) & "/" & year(date())
 	
@@ -28,7 +30,7 @@
 		co_gs = rs("CO_GS")
 	end if
 			
-	SQL = "INSERT INTO TB_AFASTAMENTOS (co_unidade, co_matricula, co_tipo_afastamento, dt_inicio, dt_fim, co_situacao, de_obs, dh_criacao, co_criador, co_gs, co_criador_final) VALUES(" & co_unidade & ",'" & matricula & "'," & tipo_afast & ",'" & data_inicio & "','" & data_fim & "',1,'','" & data & "','" & usuario & "'," & co_gs & ", NULL)"
+	SQL = "INSERT INTO TB_AFASTAMENTOS (co_unidade, co_matricula, co_tipo_afastamento, dt_inicio, dt_fim, co_situacao, de_obs, dh_criacao, co_criador, co_gs, co_criador_final, QTD_HORAS_ACOMPANHAMENTO) VALUES(" & co_unidade & ",'" & matricula & "'," & tipo_afast & ",'" & data_inicio & "','" & data_fim & "',1,'','" & data & "','" & usuario & "'," & co_gs & ", NULL, "&qtdHorasAcompanhamento&")"
 	
 	response.write SQL
 	

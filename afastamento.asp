@@ -352,19 +352,21 @@ $(document).on("click","#solicitar", function(){
 			method: "POST",
 			url: "acompanhamento_medico.asp?acao=consultarSaldo&matricula="+$("#matricula").val(),
 			success: function(data) {
-				var objeto = $.parseJSON(data.responseText),
+				var objeto = $.parseJSON(data),
 					saldo  = objeto.saldo;
-				if($("#quantidadeHoras").val() > saldo){
-					alert("A quantidade de horas informada é maior do que o seu saldo de horas atual.");
+				if($("#quantidadeHoras").val() > parseInt(saldo, 10)){
+					alert("Você não tem saldo suficiente de horas para esta solicitação.");
 					return false;
 				}
 			},
-			error: function(data){ // CASO OCORRA ERRO NA REQUISIÇÃO
+			error: function(data){
 				alert("Erro ao carregar saldo de horas para Acompanhamento Médico.");
 				console.log(data.responseText);
 			}
 		})
 	}
+	
+	return false;
 	
 	$.ajax({
 		url: "afastamento_salvar.asp?"+$("#formulario").serialize(),
