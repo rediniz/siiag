@@ -1,18 +1,26 @@
 <%@LANGUAGE="VBScript" CODEPAGE="65001"%>
 <!-- #INCLUDE FILE ="include/Conexao.asp" -->
 <%
-  response.expires  = 0
-  empregado = request("empregado")
-  gerente = request("gerente")
-  edicao = request("edicao")
-  substituto = request("substituto")
+  	Response.Expires = -1
+	Response.ExpiresAbsolute = Now() - 1
+	Response.AddHeader "pragma","no-cache"
+	Response.AddHeader "cache-control","private"
+	Response.CacheControl = "no-cache"
+	
+	empregado = request("empregado")
+	gerente = request("gerente")
+	edicao = request("edicao")
+	substituto = request("substituto")
 
-  if gerente = "true" then
-	  query = "SELECT CO_MATRICULA, NO_NOME FROM VW_USUARIOS WHERE (letra = 'C') AND (IC_ATIVO = 1) AND (CO_MATRICULA <> '"&gerente&"') AND (CO_UNIDADE =  "&request.Cookies("co_usuario_unidade_siiag")&") ORDER BY NO_NOME"
+   queryCargo = "select co_cargo from tb_usuarios where co_matricula = '"&empregado&"'"
+   cargo = objConn.execute(queryCargo)("CO_CARGO")
+   
+  if cargo = 1 then
+	  query = "SELECT CO_MATRICULA, NO_NOME FROM VW_USUARIOS WHERE (letra = 'C') AND (IC_ATIVO = 1) AND (CO_MATRICULA <> '"&gerente&"') AND (CO_UNIDADE =  "& request.Cookies("co_usuario_unidade_siiag") &") ORDER BY NO_NOME"
 	
 	  set ds=Server.CreateObject("ADODB.RecordSet")
 	  ds.Open query, dados_sys
-	  
+
 	  DO UNTIL ds.eof
 		MATRICULA_SUBSTITUTO=ds("CO_MATRICULA")
 		NOME_SUBSTITUTO=ds("NO_NOME")
@@ -28,9 +36,9 @@
 	matriculaUsuario = Session("v_Usuario_Matricula")
 	'#ALTERADO em 14/04/2016 (adicionado ORDER BY NO_NOME na query)
 	if edicao = "true" then
-		queryColaboradores = "SELECT * FROM VW_USUARIOS WHERE CO_GS = (SELECT CO_GS FROM TB_USUARIOS WHERE CO_MATRICULA = '"&empregado&"') AND IC_ATIVO=1 AND LETRA = 'C' ORDER BY NO_NOME"	
+		queryColaboradores = "SELECT * FROM VW_USUARIOS WHERE CO_GS = (SELECT CO_GS FROM TB_USUARIOS WHERE CO_MATRICULA = '"&empregado&"') AND IC_ATIVO=1 AND LETRA = 'C' AND (CO_UNIDADE =  "& request.Cookies("co_usuario_unidade_siiag") &") ORDER BY NO_NOME"	
 	else
-		queryColaboradores = "SELECT * FROM VW_USUARIOS WHERE CO_GS = (SELECT CO_GS FROM TB_USUARIOS WHERE CO_MATRICULA = '"&matriculaUsuario&"') AND CO_MATRICULA <> '"&empregado&"' AND IC_ATIVO=1 AND LETRA = 'C' ORDER BY NO_NOME"
+		queryColaboradores = "SELECT * FROM VW_USUARIOS WHERE CO_GS = (SELECT CO_GS FROM TB_USUARIOS WHERE CO_MATRICULA = '"&matriculaUsuario&"') AND CO_MATRICULA <> '"&empregado&"' AND IC_ATIVO=1 AND LETRA = 'C' AND (CO_UNIDADE =  '" & request.Cookies("co_usuario_unidade_siiag") & "') ORDER BY NO_NOME"
 	end if
 	
 	set ds=Server.CreateObject("ADODB.RecordSet")

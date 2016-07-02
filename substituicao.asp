@@ -157,12 +157,10 @@ matricula_coord = request("matricula_coord")
     });
 
     $("#empregados").on("change", function() {
-		var gerente = false;
-		if($(this).val() == "C022903"){
-			gerente = true;
-		}
+
+		if($(this).val() !== ""){
 			$.ajax({
-				url: "substituicao_consulta_empregados.asp?empregado="+$(this).val()+"&gerente="+gerente,
+				url: "substituicao_consulta_empregados.asp?empregado="+$(this).val(),
 				success: function(data) {
 					$("#substitutos").html(data);
 				},
@@ -171,6 +169,7 @@ matricula_coord = request("matricula_coord")
 					alert("Erro ao carregar empregados.");
 				}
         	});
+		}
     });
 });
 </script>
@@ -262,13 +261,18 @@ set ds=Server.CreateObject("ADODB.RecordSet")
                   <td><label>Empregado a ser substituído:</label></td>
                   <td><select <%if matricula_coord <> "" then%> disabled="disabled" <%end if%> name="empregados" id="empregados" class="form-select">
                       <option value="" selected="selected">Selecione um empregado...</option>
-                     
-                      <option value="C022903">ANDREA VIEIRA NOVAIS</option>
+                      <%
+					  queryGerente = "select co_matricula, no_nome from tb_usuarios where co_cargo = 1 AND CO_UNIDADE = '" & request.Cookies("co_usuario_unidade_siiag") & "' AND IC_ATIVO = 1"
+					  resultadoGerente = objConn.execute(queryGerente)
+					  coGerente = resultadoGerente("CO_MATRICULA")
+					  noGerente = resultadoGerente("NO_NOME")
+					  %>
+                      <option value="<%=coGerente%>"><%=noGerente%></option>
                       <%
 				matriculaUsuario = Session("v_Usuario_Matricula")
 				
 				' (remove a matrícula de quem irá ser substituido da lista de substitutos)
-				queryColaboradores = "SELECT * FROM VW_USUARIOS WHERE CO_GS = (SELECT CO_GS FROM TB_USUARIOS WHERE CO_MATRICULA = '"&matriculaUsuario&"') AND IC_ATIVO=1 AND LETRA = 'C' ORDER BY NO_NOME"
+				queryColaboradores = "SELECT * FROM VW_USUARIOS WHERE CO_GS = (SELECT CO_GS FROM TB_USUARIOS WHERE CO_MATRICULA = '"&matriculaUsuario&"') AND IC_ATIVO=1 AND LETRA = 'C' AND CO_UNIDADE = '" & request.Cookies("co_usuario_unidade_siiag") & "' ORDER BY NO_NOME"
 				
 				set ds=Server.CreateObject("ADODB.RecordSet")
                 ds.Open queryColaboradores, dados_sys 
@@ -341,7 +345,7 @@ set ds=Server.CreateObject("ADODB.RecordSet")
 			  
 			  if cogs <> "" and cogs <> 0 Then
 			  
-				Query4 ="SELECT CO_GERENTE FROM VW_GS WHERE (CO_GS = "&cogs&") AND (IC_ATIVO = 1)"
+				Query4 ="SELECT CO_GERENTE FROM VW_GS WHERE (CO_GS = "&cogs&") AND (IC_ATIVO = 1) AND CO_UNIDADE = '" & request.Cookies("co_usuario_unidade_siiag") & "'"
 				set ds=Server.CreateObject("ADODB.RecordSet")
 				ds.Open Query4, dados_sys 
 				matricula_gerente=ds("CO_GERENTE")
